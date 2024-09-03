@@ -1,6 +1,6 @@
 using System;
 
-// Inherit this class from the Game class
+// Inherit this class from the Game class. Complete the tasks in the Game Class before making changes here.
 public class TicTacToeGame
 {
     // This game uses the Enum "Player" to keep track of the move. We can use a 2D array to keep track of the board.
