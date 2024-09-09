@@ -27,7 +27,9 @@ public abstract class Game
 
     // Create a constructor to initialize the game
     public Game()
-    { }
+    {
+        InitializeGame(); 
+    }
 
     // Create the following abstract methods for the following
     // 1. InitializeGame
