@@ -29,9 +29,9 @@ public class TicTacToeGame : Game
         //This method will perform the follwing
 
         // if the gamestate is ongoing, return false
-         if (gameState == GameState.Ongoing)
+         if (gameState != GameState.Ongoing)
          {
-            //return false;
+            return false;
          }
         // if the move is not valid, return false
         if (!IsValidMove(row, col))
