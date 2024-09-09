@@ -17,7 +17,7 @@ public enum GameState
 // convert this class into an abstract class
 public class Game
 {
-    // Why do we use protected here?
+    // Why do we use protected here?    A: protected variables can be only used for the classes that are internal to the owner class
     protected Player currentPlayer;
     protected GameState gameState;
 
