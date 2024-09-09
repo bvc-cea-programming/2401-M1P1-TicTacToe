@@ -1,8 +1,9 @@
 using System;
 
 // Inherit this class from the Game class. Complete the tasks in the Game Class before making changes here.
-public class TicTacToeGame
+public class TicTacToeGame : Game
 {
+    
     // This game uses the Enum "Player" to keep track of the move. We can use a 2D array to keep track of the board.
     private Player[,] _board;
     private int _movesMade;
@@ -14,6 +15,7 @@ public class TicTacToeGame
     // override the method that Initializes the game. In this case, it initializes the board.
     public void InitializeGame()
     {
+        
         _board = new Player[3, 3];
         
         // Set the default player to Player X and set the game state to Ongoing
@@ -25,6 +27,7 @@ public class TicTacToeGame
     public bool MakeMove(int row, int col)
     {
         //This method will perform the follwing
+        
         
         // if the gamestate is ongoing, return false
         
@@ -67,18 +70,27 @@ public class TicTacToeGame
     {
         // Use  this method to check if the move is a win. It will return true if the move is a win. Otherwise, it will return false.
         // Check row
-        
+        switch (gameState)
+        {
+            case GameState.Win:
 
-        // Check column
-        
+                return ;
+            case GameState.Draw:
+                return "draw";
+            default:
 
-        // Check diagonal
-        
 
-        // Check anti-diagonal
-        
+                // Check column
 
-        return false;
+
+                // Check diagonal
+
+
+                // Check anti-diagonal
+
+
+                return false;
+        }
     }
 
     // Override the CheckDrawCondition method from the game class
@@ -94,16 +106,16 @@ public class TicTacToeGame
     {
         // In a switch case statement, check the game state and return the appropriate string.
         // Uncomment the switch statement below, and add your code replacing the '...'
-        /*switch (...)
+        switch (gameState)
         {
-            case ...
+            case GameState.Win:
                 return $"Player {currentPlayer} wins!";
-            case ...
+            case GameState.Draw:
                 return "The game is a draw.";
-            case ...
+            case GameState.Ongoing:
             default:
                 return "The game is ongoing.";
-        }*/
+        }
         return "";
     }
 
