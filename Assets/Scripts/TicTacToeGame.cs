@@ -1,7 +1,7 @@
 using System;
 
 // Inherit this class from the Game class. Complete the tasks in the Game Class before making changes here.
-public class TicTacToeGame
+public class TicTacToeGame : Game
 {
     // This game uses the Enum "Player" to keep track of the move. We can use a 2D array to keep track of the board.
     private Player[,] _board;
@@ -12,7 +12,7 @@ public class TicTacToeGame
     }
 
     // override the method that Initializes the game. In this case, it initializes the board.
-    public void InitializeGame()
+    public override void InitializeGame()
     {
         _board = new Player[3, 3];
         
@@ -22,12 +22,15 @@ public class TicTacToeGame
     }
 
     // override the MakeMove method you created in the Game class. Add your code after each comment.
-    public bool MakeMove(int row, int col)
+    public override bool MakeMove(int row, int col)
     {
         //This method will perform the follwing
-        
+
         // if the gamestate is ongoing, return false
-        
+        if (gameState == GameState.Ongoing)
+        {
+            return false;
+        }
         // if the move is not valid, return false
         
         // update the cell value to the current player value
@@ -63,7 +66,7 @@ public class TicTacToeGame
     }
 
     // Override the CheckWinCondition method from the game class
-    private bool CheckWinCondition(int row, int col)
+    protected override bool CheckWinCondition(int row, int col)
     {
         // Use  this method to check if the move is a win. It will return true if the move is a win. Otherwise, it will return false.
         // Check row
@@ -82,7 +85,7 @@ public class TicTacToeGame
     }
 
     // Override the CheckDrawCondition method from the game class
-    private bool CheckDrawCondition()
+    protected override bool CheckDrawCondition()
     {
         // Use this method to check if the game is a draw. It will return true if the game is a draw. Otherwise, it will return false.
         // One way to check that is to check if the number of moves made is equal to 9.
@@ -90,7 +93,7 @@ public class TicTacToeGame
     }
 
     // Override the GetGameResult method from the game class
-    public string GetGameResult()
+    public override string GetGameResult()
     {
         // In a switch case statement, check the game state and return the appropriate string.
         // Uncomment the switch statement below, and add your code replacing the '...'
