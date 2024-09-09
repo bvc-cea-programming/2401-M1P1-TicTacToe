@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 
 // Inherit this class from the Game class. Complete the tasks in the Game Class before making changes here.
 public class TicTacToeGame : Game
@@ -15,9 +16,10 @@ public class TicTacToeGame : Game
     public override void InitializeGame()
     {
         _board = new Player[3, 3];
-        
+
         // Set the default player to Player X and set the game state to Ongoing
-        
+        currentPlayer = Player.X;
+        gameState = GameState.Ongoing;
         _movesMade = 0;
     }
 
@@ -27,29 +29,34 @@ public class TicTacToeGame : Game
         //This method will perform the follwing
 
         // if the gamestate is ongoing, return false
-        if (gameState == GameState.Ongoing)
+         if (gameState == GameState.Ongoing)
+         {
+            //return false;
+         }
+        // if the move is not valid, return false
+        if (!IsValidMove(row, col))
         {
             return false;
         }
-        // if the move is not valid, return false
-        
         // update the cell value to the current player value
-        
+        _board[row, col] = currentPlayer;
         // increment the number of moves
-        
+        _movesMade++;
 
         if (CheckWinCondition(row, col))
         {
             // Set the game state to Win
+            gameState = GameState.Win;
         }
         else if (CheckDrawCondition())
         {
             // Set the game state to Draw
+            gameState = GameState.Draw;
         }
         else
         {
             // Uncomment below line to switch the player, make sure you inherit from the Game class
-            //SwitchPlayer();
+            SwitchPlayer();
         }
 
         return true;
@@ -70,16 +77,29 @@ public class TicTacToeGame : Game
     {
         // Use  this method to check if the move is a win. It will return true if the move is a win. Otherwise, it will return false.
         // Check row
-        
+        // Assuming 3 by 3, also skipping the loop
+        if (_board[row, 0] == _board[row, 1] && _board[row, 0] == _board[row, 2])
+        {
+            return true;
+        }
+
 
         // Check column
-        
+        if (_board[0, col] == _board[1, col] && _board[0, col] == _board[2, col])
+        {
+            return true;
+        }
 
         // Check diagonal
+        // Check anti-diagonal
+        if ((row == col && _board[0, 0] == _board[1, 1] && _board[0, 0] == _board[2, 2]) ||
+            ((row + col == 2) && _board[0, 2] == _board[1, 1] && _board[0, 2] == _board[2, 0]))
+        {
+            return true;
+        }
+
         
 
-        // Check anti-diagonal
-        
 
         return false;
     }
@@ -89,7 +109,12 @@ public class TicTacToeGame : Game
     {
         // Use this method to check if the game is a draw. It will return true if the game is a draw. Otherwise, it will return false.
         // One way to check that is to check if the number of moves made is equal to 9.
-        return false; // replace this with your code
+
+        if (_movesMade == 9 && CheckWinCondition(0, 0) == false)
+        {
+            return true;
+        }
+        return false;
     }
 
     // Override the GetGameResult method from the game class
@@ -97,16 +122,16 @@ public class TicTacToeGame : Game
     {
         // In a switch case statement, check the game state and return the appropriate string.
         // Uncomment the switch statement below, and add your code replacing the '...'
-        /*switch (...)
+        switch (gameState)
         {
-            case ...
+            case GameState.Win:
                 return $"Player {currentPlayer} wins!";
-            case ...
+            case GameState.Draw:
                 return "The game is a draw.";
-            case ...
+            case GameState.Ongoing:
             default:
                 return "The game is ongoing.";
-        }*/
+        }
         return "";
     }
 
