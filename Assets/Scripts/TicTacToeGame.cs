@@ -10,7 +10,6 @@ public class TicTacToeGame : Game
 
     public TicTacToeGame() : base()
     {
-        //InitializeGame();
     }
 
     // override the method that Initializes the game. In this case, it initializes the board.

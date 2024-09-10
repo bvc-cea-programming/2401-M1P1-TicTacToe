@@ -21,5 +21,12 @@ public class BoardInteractor : MonoBehaviour
     {
         // Cast a physics ray from the camera to the pointer position
         // Check for a Board Button and interact with it
+        Ray ray = _mainCam.ScreenPointToRay(pointerPosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            Debug.Log("Hit " + hit.collider.ToString());
+        }
     }
 }
