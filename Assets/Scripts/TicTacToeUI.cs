@@ -17,6 +17,7 @@ public class TicTacToeUI : MonoBehaviour
     private void Start()
     {
         _game = new TicTacToeGame();
+        Game _game1 = new TicTacToeGame();
         InitializeBoard();
         UpdateCurrentPlayerText();
         gameResultText.text = "";

@@ -1,6 +1,7 @@
 
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class GameRunner : MonoBehaviour
 {
@@ -30,9 +31,22 @@ public class GameRunner : MonoBehaviour
     public void OnBoardButtonClick(int row, int col, Vector2 position)
     {
         //Make the move
-        
+        bool moveMade = _game.MakeMove(row, col);
+
         //If the move is valid,
         //Update the board
+        if(moveMade)
+        {
+            UpdateBoard(position);
+            if(_game.CurrentState == GameState.Ongoing)
+            {
+                UpdateCurrentPlayerText();
+            }
+            else
+            {
+                EndGame();
+            }
+        }
         //Update the game state, check if the game is over
         
         
@@ -40,22 +54,28 @@ public class GameRunner : MonoBehaviour
 
     private void UpdateBoard(Vector2 position)
     {
-        // Check the game values and update the board by instantiating correct prefab objects.    
+        // Check the game values and update the board by instantiating correct prefab objects.
+        
     }
     
     private void UpdateCurrentPlayerText()
     {
         // update which player is currently playing
+        currentPlayerText.text = $"Current Player: {_game.CurrentPlayer}";
     }
 
     private void EndGame()
     {
         // update and display who won the game
-        
+        gameResultText.text = _game.GetGameResult();
     }
 
     public void ResetGame()
     {
         // rese the game
+        _game.ResetGame();
+        InitializeBoard();
+        UpdateCurrentPlayerText();
+        gameResultText.text = "";
     }
 }
