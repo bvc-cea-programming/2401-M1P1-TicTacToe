@@ -14,7 +14,7 @@ public class TicTacToeGame : Game
     }
 
     // override the method that Initializes the game. In this case, it initializes the board.
-    public void InitializeGame()
+    public override void InitializeGame()
     {
         
         _board = new Player[3, 3];
@@ -79,31 +79,25 @@ public class TicTacToeGame : Game
         // Use  this method to check if the move is a win. It will return true if the move is a win. Otherwise, it will return false.
 
         // Check row
-        if (_board[row, 0] == Player.X && _board[row, 1] == Player.X && _board[row, 2] == Player.X) return true;
+        if (_board[row, 0] == currentPlayer && _board[row, 1] == currentPlayer && _board[row, 2] == currentPlayer) return true;
 
         // Check column
-        if (_board[col, 0] == Player.X && _board[col, 1] == Player.X && _board[col, 2] == Player.X) return true;
+        if (_board[col, 0] == currentPlayer && _board[col, 1] == currentPlayer && _board[col, 2] == currentPlayer) return true;
 
         // Check diagonal
-        if (_board[0, 0] == Player.X && _board[1, 1] == Player.X && _board[2, 2] == Player.X) return true;
+        if (_board[0, 0] == currentPlayer && _board[1, 1] == currentPlayer && _board[2, 2] == currentPlayer) return true;
 
         // Check anti-diagonal
-        if (_board[0,2]==Player.X && _board[1, 1] == Player.X && _board[1, 2] == Player.X) return true;
+        if (_board[0,2]== currentPlayer && _board[1, 1] == currentPlayer && _board[1, 2] == currentPlayer) return true;
 
         return false;
         }
-    }
 
-    // Override the CheckDrawCondition method from the game class
     public override bool CheckDrawCondition()
     {
-
-        // Use this method to check if the game is a draw. It will return true if the game is a draw. Otherwise, it will return false.
-        // One way to check that is to check if the number of moves made is equal to 9.
-        return false; // replace this with your code
+        throw new NotImplementedException();
     }
 
-    // Override the GetGameResult method from the game class
     public override string GetGameResult()
     {
         // In a switch case statement, check the game state and return the appropriate string.
@@ -121,6 +115,8 @@ public class TicTacToeGame : Game
         }
         return "";
     }
+
+    // Override the GetGameResult method from the game class
 
     // Additional method to get the player at a specific position
     public Player GetPlayerAtPosition(int row, int col)
