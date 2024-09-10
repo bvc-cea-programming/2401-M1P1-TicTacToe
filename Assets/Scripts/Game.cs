@@ -15,7 +15,7 @@ public enum GameState
 }
 
 // convert this class into an abstract class
-public class Game
+abstract public class Game
 {
     // Why do we use protected here?
     protected Player currentPlayer;
@@ -26,15 +26,32 @@ public class Game
     public GameState CurrentState => gameState;
 
     // Create a constructor to initialize the game
+    public Game()
+    {
+        InitializeGame();
+    }
     
 
     // Create the following abstract methods for the following
     // 1. InitializeGame
+    public abstract void InitializeGame();
+
+
     // 2. MakeMove - returns true if the move was successful, parameters should be the row and column of the move
+    public abstract bool MakeMove(int row, int column);
+
+
     // 3. CheckWinCondition - returns true if the win condition is met, parameters should be the row and column of the move
+    public abstract bool CheckWinCondition(int row, int column);
+
+
     // 4. CheckDrawCondition - returns true if the draw condition is met
+    public abstract bool CheckDrawCondition();
+
+
     // 5. GetGameResult - returns the result of the game
-    
+    public abstract string GetGameResult();
+
 
     // What does this method do?
     protected void SwitchPlayer()
