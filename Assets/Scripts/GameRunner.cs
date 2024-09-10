@@ -34,6 +34,8 @@ public class GameRunner : MonoBehaviour
         Destroy( piece );
         }
         gameResultText.text = "";
+        _game.InitializeGame();
+        UpdateCurrentPlayerText();
     }
 
     public void OnBoardButtonClick(int row, int col, Vector2 position)
@@ -46,7 +48,7 @@ public class GameRunner : MonoBehaviour
         bool moveMade = _game.MakeMove(row, col);
         if (moveMade)
         {
-            UpdateBoard(position);
+            UpdateBoard(row, col, position);
             if (_game.CurrentState == GameState.Ongoing)
             {
                 UpdateCurrentPlayerText();
@@ -59,15 +61,15 @@ public class GameRunner : MonoBehaviour
 
     }
 
-    private void UpdateBoard(Vector2 position)
+    private void UpdateBoard(int row, int col, Vector2 position)
     {
         // Check the game values and update the board by instantiating correct prefab objects.    
         if (_game.CurrentPlayer == Player.X)
         {   //because this is player X's turn after the move is made, we place O and vice versa
-            Instantiate(oPrefab, new Vector3(position.x, 0.1f, position.y), Quaternion.Euler(90, 0, 0), pieces.transform);
+            _boardObjects[row, col] = Instantiate(oPrefab, new Vector3(position.x, 0.1f, position.y), Quaternion.Euler(90, 0, 0), pieces.transform);
         } else if (_game.CurrentPlayer == Player.O)
         {
-            Instantiate(xPrefab, new Vector3(position.x, 0.1f, position.y), Quaternion.identity, pieces.transform);
+            _boardObjects[row, col] = Instantiate(xPrefab, new Vector3(position.x, 0.1f, position.y), Quaternion.identity, pieces.transform);
         }
     }
     
@@ -79,6 +81,8 @@ public class GameRunner : MonoBehaviour
 
     private void EndGame()
     {
+        //empty out current player text
+        currentPlayerText.text = "";
         // update and display who won the game
         if (_game.CurrentState == GameState.Draw)
         {
