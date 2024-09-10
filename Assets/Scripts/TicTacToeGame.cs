@@ -127,6 +127,7 @@ public class TicTacToeGame : Game
         switch (gameState)
         {
             case GameState.Win:
+                SwitchPlayer();
                 return $"Player {currentPlayer} wins!";
             case GameState.Draw:
                 return "The game is a draw.";

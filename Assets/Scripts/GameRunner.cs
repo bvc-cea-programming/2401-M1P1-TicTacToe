@@ -105,7 +105,6 @@ public class GameRunner : MonoBehaviour
     public void ResetGame()
     {
         // reset the game
-        Debug.Log("game reset");
         InitializeBoard();
     }
 }
