@@ -132,7 +132,6 @@ public class TicTacToeGame : Game
 
     // Method to reset the game
     public void ResetGame()
-
     {
         InitializeGame();
     }
