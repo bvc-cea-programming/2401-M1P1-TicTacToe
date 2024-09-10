@@ -18,6 +18,7 @@ public class TicTacToeGame : Game
     {
         
         _board = new Player[3, 3];
+
         
         // Set the default player to Player X and set the game state to Ongoing
         
@@ -46,7 +47,7 @@ public class TicTacToeGame : Game
         {
             // Set the game state to Win
             gameState = GameState.Win;
-            return true;
+            
         }
         else if (CheckDrawCondition())
         {
@@ -95,7 +96,12 @@ public class TicTacToeGame : Game
 
     public override bool CheckDrawCondition()
     {
-        throw new NotImplementedException();
+       if( _movesMade == 9 && gameState != GameState.Win )
+        {
+            return true;
+    
+        }
+            return false;
     }
 
     public override string GetGameResult()

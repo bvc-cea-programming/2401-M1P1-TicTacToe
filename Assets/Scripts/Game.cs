@@ -28,7 +28,10 @@ public abstract class Game
     // Public properties for external access
     public Player CurrentPlayer => currentPlayer;
     public GameState CurrentState => gameState;
-
+    public Game ()
+    {
+        InitializeGame();
+    }
     // Create a constructor to initialize the game
     public abstract void InitializeGame();
     public abstract bool MakeMove(int row, int col);
