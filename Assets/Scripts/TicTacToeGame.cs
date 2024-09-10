@@ -43,7 +43,7 @@ public class TicTacToeGame : Game
         // increment the number of moves
         _movesMade++;
 
-        SwitchPlayer();
+       
 
         if (CheckWinCondition(row, col))
         {
@@ -59,6 +59,7 @@ public class TicTacToeGame : Game
         {
             // Uncomment below line to switch the player, make sure you inherit from the Game class
             //I am moving switch the player above to make the 3d easier
+            SwitchPlayer();
         }
 
         return true;
@@ -127,7 +128,6 @@ public class TicTacToeGame : Game
         switch (gameState)
         {
             case GameState.Win:
-                SwitchPlayer();
                 return $"Player {currentPlayer} wins!";
             case GameState.Draw:
                 return "The game is a draw.";

@@ -64,12 +64,13 @@ public class GameRunner : MonoBehaviour
     private void UpdateBoard(int row, int col, Vector2 position)
     {
         // Check the game values and update the board by instantiating correct prefab objects.    
-        if (_game.CurrentPlayer == Player.X)
+        if (_game.GetPlayerAtPosition(row, col) == Player.X)
         {   //because this is player X's turn after the move is made, we place O and vice versa
-            _boardObjects[row, col] = Instantiate(oPrefab, new Vector3(position.x, 0.1f, position.y), Quaternion.Euler(90, 0, 0), pieces.transform);
-        } else if (_game.CurrentPlayer == Player.O)
-        {
             _boardObjects[row, col] = Instantiate(xPrefab, new Vector3(position.x, 0.1f, position.y), Quaternion.identity, pieces.transform);
+        }
+        else
+        {
+            _boardObjects[row, col] = Instantiate(oPrefab, new Vector3(position.x, 0.1f, position.y), Quaternion.Euler(90, 0, 0), pieces.transform);
         }
     }
     
@@ -84,22 +85,23 @@ public class GameRunner : MonoBehaviour
         //empty out current player text
         currentPlayerText.text = "";
         // update and display who won the game
-        if (_game.CurrentState == GameState.Draw)
-        {
-            gameResultText.text = "Draw Game";
-        }
-        else if (_game.CurrentState == GameState.Win)
-        {
-            if (_game.CurrentPlayer == Player.X)
-            {
-                gameResultText.text = "Player O Wins";
-            }
-            else 
-            {
-                gameResultText.text = "Player X Wins";
-            }
-            
-        }
+        /* if (_game.CurrentState == GameState.Draw)
+         {
+             gameResultText.text = "Draw Game";
+         }
+         else if (_game.CurrentState == GameState.Win)
+         {
+             if (_game.CurrentPlayer == Player.X)
+             {
+                 gameResultText.text = "Player O Wins";
+             }
+             else 
+             {
+                 gameResultText.text = "Player X Wins";
+             }
+
+         }*/
+        gameResultText.text = _game.GetGameResult();
     }
 
     public void ResetGame()
