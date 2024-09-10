@@ -1,7 +1,7 @@
 using System;
 
 // Inherit this class from the Game class. Complete the tasks in the Game Class before making changes here.
-public class TicTacToeGame
+public class TicTacToeGame : Game
 {
     // This game uses the Enum "Player" to keep track of the move. We can use a 2D array to keep track of the board.
     private Player[,] _board;
@@ -12,41 +12,56 @@ public class TicTacToeGame
     }
 
     // override the method that Initializes the game. In this case, it initializes the board.
-    public void InitializeGame()
+    public override void InitializeGame()
     {
         _board = new Player[3, 3];
-        
+
         // Set the default player to Player X and set the game state to Ongoing
+        currentPlayer = Player.X;
+        gameState = GameState.Ongoing;
+        
         
         _movesMade = 0;
     }
 
     // override the MakeMove method you created in the Game class. Add your code after each comment.
-    public bool MakeMove(int row, int col)
+    public override bool MakeMove(int row, int col)
     {
-        //This method will perform the follwing
-        
-        // if the gamestate is ongoing, return false
-        
+        //This method will perform the following
+
+        // if the gamestate is not ongoing, return false 
+        if (gameState != GameState.Ongoing)
+        {
+            return false;
+        }
+
         // if the move is not valid, return false
-        
+        if(IsValidMove(row, col) == false)
+        {
+            return false;
+        }
+
         // update the cell value to the current player value
-        
+        _board[row, col] = currentPlayer;
+
         // increment the number of moves
-        
+        _movesMade++;
+
 
         if (CheckWinCondition(row, col))
         {
             // Set the game state to Win
+            gameState = GameState.Win;
         }
         else if (CheckDrawCondition())
         {
             // Set the game state to Draw
+            gameState = GameState.Draw;
         }
         else
         {
             // Uncomment below line to switch the player, make sure you inherit from the Game class
-            //SwitchPlayer();
+            SwitchPlayer();
         }
 
         return true;
@@ -63,47 +78,73 @@ public class TicTacToeGame
     }
 
     // Override the CheckWinCondition method from the game class
-    private bool CheckWinCondition(int row, int col)
+    public override bool CheckWinCondition(int row, int col)
     {
         // Use  this method to check if the move is a win. It will return true if the move is a win. Otherwise, it will return false.
         // Check row
-        
+        if (_board[row, 0] == currentPlayer && _board[row, 1] == currentPlayer && _board[row, 2] == currentPlayer)
+        {
+            return true;
+        }
 
         // Check column
-        
+        else if (_board[0, col] == currentPlayer && _board[1, col] == currentPlayer && _board[2, col] == currentPlayer)
+        {
+            return true;
+        }
 
         // Check diagonal
-        
+        else if (_board[0,2] == currentPlayer && _board[1, 1] == currentPlayer && _board[2,0] == currentPlayer)
+        {
+            return true;
+        }
+
 
         // Check anti-diagonal
-        
+        else if (_board[0, 0] == currentPlayer && _board[1, 1] == currentPlayer && _board[2, 2] == currentPlayer)
+        {
+            return true;
+        }
 
-        return false;
+        else
+        {
+            return false;
+        }
+        
     }
 
     // Override the CheckDrawCondition method from the game class
-    private bool CheckDrawCondition()
+    public override bool CheckDrawCondition()
     {
         // Use this method to check if the game is a draw. It will return true if the game is a draw. Otherwise, it will return false.
         // One way to check that is to check if the number of moves made is equal to 9.
-        return false; // replace this with your code
+        if(_movesMade == 9)
+        {
+            return true;
+        }
+
+        else
+        {
+            return false; // replace this with your code
+        }
+        
     }
 
     // Override the GetGameResult method from the game class
-    public string GetGameResult()
+    public override string GetGameResult()
     {
         // In a switch case statement, check the game state and return the appropriate string.
         // Uncomment the switch statement below, and add your code replacing the '...'
-        /*switch (...)
+        switch (gameState)
         {
-            case ...
+            case GameState.Win:
                 return $"Player {currentPlayer} wins!";
-            case ...
+            case GameState.Draw:
                 return "The game is a draw.";
-            case ...
+            case GameState.Ongoing:
             default:
                 return "The game is ongoing.";
-        }*/
+        }
         return "";
     }
 
