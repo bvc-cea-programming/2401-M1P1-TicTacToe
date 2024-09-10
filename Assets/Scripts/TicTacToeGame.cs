@@ -43,6 +43,8 @@ public class TicTacToeGame : Game
         // increment the number of moves
         _movesMade++;
 
+        SwitchPlayer();
+
         if (CheckWinCondition(row, col))
         {
             // Set the game state to Win
@@ -56,7 +58,7 @@ public class TicTacToeGame : Game
         else
         {
             // Uncomment below line to switch the player, make sure you inherit from the Game class
-            SwitchPlayer();
+            //I am moving switch the player above to make the 3d easier
         }
 
         return true;
@@ -73,7 +75,7 @@ public class TicTacToeGame : Game
     }
 
     // Override the CheckWinCondition method from the game class
-    protected override bool CheckWinCondition(int row, int col)
+    protected override bool CheckWinCondition(int row, int col) //this row and col is the newest move the player made
     {
         // Use  this method to check if the move is a win. It will return true if the move is a win. Otherwise, it will return false.
         // Check row

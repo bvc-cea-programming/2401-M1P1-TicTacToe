@@ -327,6 +327,7 @@ MonoBehaviour:
   gameResultText: {fileID: 202417401}
   xPrefab: {fileID: 6730410840074637034, guid: 6044850cec1e88441994897def2cab12, type: 3}
   oPrefab: {fileID: 8746657913125634303, guid: 99212564d8d2f47488a3ca4632d6c0e8, type: 3}
+  gameBoard: {fileID: 6450697237462599807}
 --- !u!4 &256197048
 Transform:
   m_ObjectHideFlags: 0
@@ -1496,8 +1497,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 213084b8b4da16a4995020ea37f7083d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  row: 32
-  col: 0
+  row: 3
+  col: 2
   gameRunner: {fileID: 256197047}
 --- !u!65 &1482034132
 BoxCollider:
