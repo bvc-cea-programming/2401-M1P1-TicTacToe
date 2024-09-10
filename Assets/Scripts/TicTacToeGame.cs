@@ -7,7 +7,7 @@ public class TicTacToeGame : Game
     // This game uses the Enum "Player" to keep track of the move. We can use a 2D array to keep track of the board.
     private Player[,] _board;
     private int _movesMade;
-    private GameState _state;
+   // private GameState _state;
 
     public TicTacToeGame() : base()
     {
@@ -20,7 +20,7 @@ public class TicTacToeGame : Game
 
         // Set the default player to Player X and set the game state to Ongoing
         currentPlayer = Player.X;   
-        _state = GameState.Ongoing;
+        gameState = GameState.Ongoing;
 
         _movesMade = 0;
     }
@@ -30,32 +30,33 @@ public class TicTacToeGame : Game
     {
         //This method will perform the follwing
         
-        // if the gamestate is ongoing, return false
-        if(gameState == GameState.Ongoing)
+        // if the gamestate is not ongoing, return false
+        if(gameState != GameState.Ongoing)
         {
-            gameState = GameState.Ongoing;
+            //gameState = GameState.Ongoing;
             return false;
         }
         // if the move is not valid, return false
-        else if (IsValidMove( row, col) == false)
+        else if (!IsValidMove( row, col))
         { 
             return false;
         }
 
         // update the cell value to the current player value
-
+        _board[row, col] = currentPlayer;
+        
         // increment the number of moves
         _movesMade ++;
 
         if (CheckWinCondition(row, col))
         {
             // Set the game state to Win
-            _state =GameState.Win;
+            gameState = GameState.Win;
         }
         else if (CheckDrawCondition())
         {
             // Set the game state to Draw
-            _state = GameState.Draw;
+            gameState = GameState.Draw;
         }
         else
         {
