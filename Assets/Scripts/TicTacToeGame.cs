@@ -47,10 +47,12 @@ public class TicTacToeGame : Game
 
         if (CheckWinCondition(row, col))
         {
+            SwitchPlayer();
             gameState = GameState.Win;
         }
         else if (CheckDrawCondition())
         {
+            SwitchPlayer();
             gameState = GameState.Draw;
         }
         else

@@ -16,10 +16,22 @@ public class BoardInteractor : MonoBehaviour
             CastRayAndInteract(Input.mousePosition);
         }
     }
-    
+
     private void CastRayAndInteract(Vector2 pointerPosition)
     {
-        // Cast a physics ray from the camera to the pointer position
-        // Check for a Board Button and interact with it
+        RaycastHit hit;
+        Ray rayToCast = _mainCam.ScreenPointToRay(pointerPosition);
+        if (Physics.Raycast(rayToCast.origin, rayToCast.direction,out hit))
+        {
+            
+            if (hit.transform.gameObject.layer == 3)
+            {
+                
+                    hit.transform.gameObject.GetComponent<BoardButton>().Interact();
+
+            }
+            // Cast a physics ray from the camera to the pointer position
+            // Check for a Board Button and interact with it
+        }
     }
 }

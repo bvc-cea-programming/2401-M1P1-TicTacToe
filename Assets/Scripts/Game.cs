@@ -49,5 +49,14 @@ public abstract class Game
     protected void SwitchPlayer()
     {
         currentPlayer = currentPlayer == Player.X ? Player.O : Player.X;
+     /*   if(currentPlayer == Player.X)
+        {
+            currentPlayer = Player.O;
+            //prefab = 0
+        }
+        else
+        {
+            currentPlayer = Player.X;
+        }*/
     }
 }
