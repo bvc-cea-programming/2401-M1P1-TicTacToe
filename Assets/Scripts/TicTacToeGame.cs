@@ -10,6 +10,7 @@ public class TicTacToeGame : Game
 
     public TicTacToeGame() : base()
     {
+
     }
 
     // override the method that Initializes the game. In this case, it initializes the board.
@@ -21,35 +22,42 @@ public class TicTacToeGame : Game
         // Set the default player to Player X and set the game state to Ongoing
         
         _movesMade = 0;
+        gameState = GameState.Ongoing;
+        currentPlayer = Player.X;
     }
 
     // override the MakeMove method you created in the Game class. Add your code after each comment.
-    public bool MakeMove(int row, int col)
+    public override bool MakeMove(int row, int col)
     {
+
         //This method will perform the follwing
-        
-        
-        // if the gamestate is ongoing, return false
-        
-        // if the move is not valid, return false
-        
+
+
+        if (gameState != GameState.Ongoing) return false;
+
+        if (!IsValidMove(row, col)) return false;
+
         // update the cell value to the current player value
-        
+        _board[row, col] = currentPlayer;
         // increment the number of moves
-        
+        _movesMade++;
 
         if (CheckWinCondition(row, col))
         {
             // Set the game state to Win
+            gameState = GameState.Win;
+            return true;
         }
         else if (CheckDrawCondition())
         {
             // Set the game state to Draw
+            gameState = GameState.Draw;
+
         }
         else
         {
             // Uncomment below line to switch the player, make sure you inherit from the Game class
-            //SwitchPlayer();
+            SwitchPlayer();
         }
 
         return true;
@@ -66,46 +74,41 @@ public class TicTacToeGame : Game
     }
 
     // Override the CheckWinCondition method from the game class
-    private bool CheckWinCondition(int row, int col)
+    public override bool CheckWinCondition(int row, int col)
     {
         // Use  this method to check if the move is a win. It will return true if the move is a win. Otherwise, it will return false.
+
         // Check row
-        switch (gameState)
-        {
-            case GameState.Win:
+        if (_board[row, 0] == Player.X && _board[row, 1] == Player.X && _board[row, 2] == Player.X) return true;
 
-                return ;
-            case GameState.Draw:
-                return "draw";
-            default:
+        // Check column
+        if (_board[col, 0] == Player.X && _board[col, 1] == Player.X && _board[col, 2] == Player.X) return true;
 
+        // Check diagonal
+        if (_board[0, 0] == Player.X && _board[1, 1] == Player.X && _board[2, 2] == Player.X) return true;
 
-                // Check column
+        // Check anti-diagonal
+        if (_board[0,2]==Player.X && _board[1, 1] == Player.X && _board[1, 2] == Player.X) return true;
 
-
-                // Check diagonal
-
-
-                // Check anti-diagonal
-
-
-                return false;
+        return false;
         }
     }
 
     // Override the CheckDrawCondition method from the game class
-    private bool CheckDrawCondition()
+    public override bool CheckDrawCondition()
     {
+
         // Use this method to check if the game is a draw. It will return true if the game is a draw. Otherwise, it will return false.
         // One way to check that is to check if the number of moves made is equal to 9.
         return false; // replace this with your code
     }
 
     // Override the GetGameResult method from the game class
-    public string GetGameResult()
+    public override string GetGameResult()
     {
         // In a switch case statement, check the game state and return the appropriate string.
         // Uncomment the switch statement below, and add your code replacing the '...'
+
         switch (gameState)
         {
             case GameState.Win:
@@ -122,13 +125,14 @@ public class TicTacToeGame : Game
     // Additional method to get the player at a specific position
     public Player GetPlayerAtPosition(int row, int col)
     {
-        if (row < 0 || row > 2 || col < 0 || col > 2)
-            throw new ArgumentOutOfRangeException("Position out of bounds.");
-        return _board[row, col];
+    if (row < 0 || row > 2 || col < 0 || col > 2)
+        throw new ArgumentOutOfRangeException("Position out of bounds.");
+    return _board[row, col];
     }
 
     // Method to reset the game
     public void ResetGame()
+
     {
         InitializeGame();
     }
