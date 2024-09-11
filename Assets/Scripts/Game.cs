@@ -17,7 +17,7 @@ public enum GameState
 // convert this class into an abstract class
 public abstract class Game
 {
-    // Why do we use protected here?== cause We need set a new viable
+    // Why do we use protected here: can been use by sub class
     protected Player currentPlayer;
     protected GameState gameState;
 
@@ -40,17 +40,15 @@ public abstract class Game
     public abstract void InitializeGame();
     public abstract bool MakeMove(int row, int col);
 
-    public abstract bool CheckWinCondition(int row, int col);
+    protected abstract bool CheckWinCondition(int row, int col);
 
 
-    public abstract bool CheckDrawCondition();
+    protected abstract bool CheckDrawCondition();
 
     public abstract string GetGameResult();
-   
+
 
     // What does this method do?
-    protected void SwitchPlayer()
-    {
-        currentPlayer = currentPlayer == Player.X ? Player.O : Player.X;
-    }
+    public abstract void SwitchPlayer();
+ 
 }

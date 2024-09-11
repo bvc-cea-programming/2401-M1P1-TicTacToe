@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using TMPro;
 
 // Inherit this class from the Game class. Complete the tasks in the Game Class before making changes here.
@@ -7,7 +8,7 @@ public class TicTacToeGame : Game
     // This game uses the Enum "Player" to keep track of the move. We can use a 2D array to keep track of the board.
     private Player[,] _board;
     private int _movesMade;
-   // private GameState _state;
+  
 
     public TicTacToeGame() : base()
     {
@@ -29,9 +30,9 @@ public class TicTacToeGame : Game
     public override bool MakeMove(int row, int col)
     {
         //This method will perform the follwing
-        
+
         // if the gamestate is not ongoing, return false
-        if(gameState != GameState.Ongoing)
+        if (gameState != GameState.Ongoing)
         {
             //gameState = GameState.Ongoing;
             return false;
@@ -68,7 +69,7 @@ public class TicTacToeGame : Game
     }
 
     // This method will check if the move is valid, first it checks if the row and column are valid. Then it checks if the cell is not already occupied.
-    private bool IsValidMove(int row, int col)
+    public bool IsValidMove(int row, int col)
     {
         if (row < 0 || row > 2 || col < 0 || col > 2)
             return false;
@@ -78,7 +79,7 @@ public class TicTacToeGame : Game
     }
 
     // Override the CheckWinCondition method from the game class
-    public override bool CheckWinCondition(int row, int col)
+    protected override bool CheckWinCondition(int row, int col)
     {
         // Use  this method to check if the move is a win. It will return true if the move is a win. Otherwise, it will return false.
         // Check row
@@ -106,7 +107,7 @@ public class TicTacToeGame : Game
     }
 
     // Override the CheckDrawCondition method from the game class
-    public override bool CheckDrawCondition()
+    protected override bool CheckDrawCondition()
     {
 
         // Use this method to check if the game is a draw. It will return true if the game is a draw. Otherwise, it will return false.
@@ -134,7 +135,7 @@ public class TicTacToeGame : Game
             default:
                 return "The game is ongoing.";
         }
-         return "Next turn to throw"; 
+       //  return "Next turn to throw"; 
        
     }
 
@@ -150,5 +151,20 @@ public class TicTacToeGame : Game
     public void ResetGame()
     {
         InitializeGame();
+    }
+
+    public override void SwitchPlayer()
+    {
+        Debug.WriteLine("currentPlayer" + currentPlayer);
+        /*
+        if (currentPlayer == Player.X)
+        {
+            currentPlayer = Player.O;
+        }
+        else {
+            currentPlayer = Player.X;
+        }*/
+        currentPlayer = currentPlayer == Player.X ? Player.O : Player.X;
+        Debug.WriteLine("current player:" + currentPlayer);
     }
 }
