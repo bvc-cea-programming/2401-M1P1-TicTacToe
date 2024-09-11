@@ -28,6 +28,11 @@ public abstract class Game
     public GameState CurrentState => gameState;
 
     // Create a constructor to initialize the game
+    public Game()
+    {
+        currentPlayer = Player.X;
+        gameState = GameState.Ongoing;
+    }
 
 
 
@@ -39,7 +44,7 @@ public abstract class Game
     public abstract bool MakeMove(int row, int col);
 
     // 3. CheckWinCondition - returns true if the win condition is met, parameters should be the row and column of the move
-    public abstract bool CheckWinCOndition(int row, int col);
+    public abstract bool CheckWinCondition(int row, int col);
     // 4. CheckDrawCondition - returns true if the draw condition is met
     public abstract bool CheckDrawCondition();
     // 5. GetGameResult - returns the result of the game
