@@ -31,10 +31,8 @@ public class GameRunner : MonoBehaviour
 
     public void InitializeBoard()
     {
-        Debug.Log("GameRunner InitializeBoard");
         //Clear the board
         //Reset all the text
-
         for (int i = 0; i < _boardObjects.Length;i++)
         {
             int row = i / 3;
@@ -48,31 +46,35 @@ public class GameRunner : MonoBehaviour
     {
 
         //Make the move
-       
-       // bool  isMoved = _game.MakeMove(row, col);
-        //bool moveMade = _game.MakeMove(row,col);
+        bool  isMoved = _game.MakeMove(row, col);
 
-        //If the move is valid,
-        //Update the board
-        //if (isMoved)
-       // {
-           
-
+        //If the move is valid, Update the board
+        if (isMoved)
+        {
             UpdateBoard(position);
-       // }
-        
-       // else
-      //  {
-         //   EndGame();
-       // }
-
+        }
+        else
+        {
+            EndGame();
+        }
         //Update the game state, check if the game is over
     }
 
     public void UpdateBoard(Vector3 position)
     {
         // Check the game values and update the board by instantiating correct prefab objects.
-        Instantiate(xPrefab, position, Quaternion.identity);
+        if(_game.CurrentPlayer == Player.X)
+        {
+          GameObject boardObject =  Instantiate(xPrefab, position, Quaternion.identity);
+            boardObject.transform.rotation = Quaternion.Euler(0, 45, 0);
+        }
+        else
+        {
+            GameObject boardObject = Instantiate(oPrefab, position, Quaternion.identity);
+            boardObject.transform.rotation = Quaternion.Euler(90, 90, 0);
+
+        }
+        
     }
     
     private void UpdateCurrentPlayerText()
