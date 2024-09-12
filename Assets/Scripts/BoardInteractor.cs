@@ -50,8 +50,8 @@ public class BoardInteractor : MonoBehaviour
         BoardButton boardButton = currentHitObject.GetComponent<BoardButton>();
         if (boardButton != null)
         {
-            currentRow = boardButton.row;
-            currentCol = boardButton.col;
+            currentRow = boardButton.row - 1;
+            currentCol = boardButton.col - 1;
        
             boardButton.Interact(currentRow, currentCol, hitPosition);
         }

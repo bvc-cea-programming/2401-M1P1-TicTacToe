@@ -354,6 +354,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05635c7a897333a42bc03e67fe3c9c4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitPosition: {x: 0, y: 0, z: 0}
+  currentHitObject: {fileID: 0}
+  currentRow: 0
+  currentCol: 0
   xPrefab: {fileID: 6730410840074637034, guid: 6044850cec1e88441994897def2cab12, type: 3}
 --- !u!1 &287632690
 GameObject:
@@ -1497,8 +1501,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 213084b8b4da16a4995020ea37f7083d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  row: 32
-  col: 0
+  row: 3
+  col: 2
   gameRunner: {fileID: 256197047}
 --- !u!65 &1482034132
 BoxCollider:

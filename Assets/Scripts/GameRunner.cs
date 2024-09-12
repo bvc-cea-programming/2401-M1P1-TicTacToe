@@ -33,24 +33,30 @@ public class GameRunner : MonoBehaviour
     {
         //Clear the board
         //Reset all the text
-        for (int i = 0; i < _boardObjects.Length;i++)
-        {
-            int row = i / 3;
-            int col = i % 3;    
-            
-            gameResultText.text = "";
-        }
+      
+        currentPlayerText.text = "Current Player: X";
+        gameResultText.text = "";
     }
 
     public void OnBoardButtonClick(int row, int col, Vector3 position)
     {
 
         //Make the move
-        bool  isMoved = _game.MakeMove(row, col);
+        //_game.MakeMove(row,col);
+        bool isMovedValid = _game.IsValidMove(row, col);
+        Debug.Log("gameState is " + _game.CurrentState);
 
-        //If the move is valid, Update the board
-        if (isMoved)
+        Debug.Log("isMovedValid :" + isMovedValid);
+        if (!isMovedValid) 
         {
+            Debug.Log("row is :" + row);
+            Debug.Log("col is :" + col);
+        }
+        //If the move is valid, Update the board
+        if (_game.MakeMove(row,col))
+        {
+            
+            Debug.Log("UpdateBoard");
             UpdateBoard(position);
         }
         else
@@ -58,15 +64,37 @@ public class GameRunner : MonoBehaviour
             EndGame();
         }
         //Update the game state, check if the game is over
+
+        // _game.GetGameResult();
+
+        if (_game.CurrentState == GameState.Win)
+        {
+            gameResultText.text =$"Player {_game.CurrentPlayer} wins!"; }
+        else if (_game.CurrentState == GameState.Ongoing)
+        {
+            gameResultText.text = "The game is ongoing";
+        }
+        else if(_game.CurrentState == GameState.Draw)
+        {
+            gameResultText.text = "The game is Draw";
+
+        }
+
     }
 
     public void UpdateBoard(Vector3 position)
     {
+       
+        Debug.Log("hit position " + position);
+        UpdateCurrentPlayerText();
+        Debug.Log("currentPlayer is" + _game.CurrentPlayer);
         // Check the game values and update the board by instantiating correct prefab objects.
-        if(_game.CurrentPlayer == Player.X)
+        if (_game.CurrentPlayer == Player.X)
         {
-          GameObject boardObject =  Instantiate(xPrefab, position, Quaternion.identity);
-            boardObject.transform.rotation = Quaternion.Euler(0, 45, 0);
+           
+            GameObject boardObject =  Instantiate(xPrefab, position, Quaternion.identity);
+           boardObject.transform.rotation = Quaternion.Euler(0, 45, 0);
+            
         }
         else
         {
@@ -88,7 +116,7 @@ public class GameRunner : MonoBehaviour
             currentPlayerText.text = "Current Player O";
            
         }
-        _game.SwitchPlayer();
+       // _game.SwitchPlayer();
     }
 
     private void EndGame()
@@ -102,6 +130,6 @@ public class GameRunner : MonoBehaviour
 
     public void ResetGame()
     {
-        // rese the game
+        // reset the game
     }
 }
