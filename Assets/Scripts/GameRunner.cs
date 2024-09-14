@@ -22,8 +22,6 @@ public class GameRunner : MonoBehaviour
     {
         _game = new TicTacToeGame();
         _game.InitializeGame();
-        UpdateCurrentPlayerText();
-        gameResultText.text = "";
         InitializeBoard();
 
         boardInteractor = GetComponent<BoardInteractor>();
@@ -43,12 +41,12 @@ public class GameRunner : MonoBehaviour
         {
             for (int col = 0; col < 3; col++)
             {
-                
+
                 if (_boardObjects[row, col] != null)
                 {
-                    Destroy( _boardObjects[row, col] );
+                    Destroy(_boardObjects[row, col]);
                 }
-                
+
             }
         }
         currentPlayerText.text = "Current Player: X";
@@ -59,40 +57,33 @@ public class GameRunner : MonoBehaviour
     {
 
         //Make the move
-        //_game.MakeMove(row,col);
-        bool isMovedValid = _game.IsValidMove(row, col);
+        
+        bool isMoved = _game.MakeMove(row, col);
+        if (isMoved)
+        {
+            Debug.Log("move is true");
+            UpdateBoard(row, col, position);
 
-       
-        if (!isMovedValid) 
-        {
-            Debug.Log("row is :" + row);
-            Debug.Log("col is :" + col);
+           if( _game.CurrentState ==  GameState.Win)
+            {
+                gameResultText.text = $"Player {_game.CurrentPlayer} wins!";
+            }
+        
+           else if (_game.CurrentState == GameState.Ongoing)
+            {
+                gameResultText.text = "The game is ongoing";
+            }
+            else if (_game.CurrentState == GameState.Draw)
+            {
+                gameResultText.text = "The game is Draw";
+            }
         }
-        //If the move is valid, Update the board
-        if (_game.MakeMove(row,col))
-        {
-            UpdateBoard(row,col, position);
-        }
+    
         else
         {
-            EndGame();
+            Debug.Log("move is false");
         }
-        //Update the game state, check if the game is over
-
-        // _game.GetGameResult();
-
-        if (_game.CurrentState == GameState.Win)
-        {
-            gameResultText.text =$"Player {_game.CurrentPlayer} wins!"; }
-        else if (_game.CurrentState == GameState.Ongoing)
-        {
-            gameResultText.text = "The game is ongoing";
-        }
-        else if(_game.CurrentState == GameState.Draw)
-        {
-            gameResultText.text = "The game is Draw";
-        }
-
+       
     }
 
     public void UpdateBoard(int row,int col,Vector3 position)
@@ -101,20 +92,21 @@ public class GameRunner : MonoBehaviour
         UpdateCurrentPlayerText();
         Debug.Log("currentPlayer is" + _game.CurrentPlayer);
         // Check the game values and update the board by instantiating correct prefab objects.
-        if (_game.CurrentPlayer == Player.X)
+
+        var a = _game._board[row, col];
+        if(a == Player.X)
         {
-           
-            boardObject =  Instantiate(xPrefab, position, Quaternion.identity);
+            boardObject = Instantiate(xPrefab, position, Quaternion.identity);
             boardObject.transform.rotation = Quaternion.Euler(0, 45, 0);
-            
+          //  _boardObjects[row, col] = boardObject;
         }
-        else
+        else 
         {
             boardObject = Instantiate(oPrefab, position, Quaternion.identity);
             boardObject.transform.rotation = Quaternion.Euler(90, 90, 0);
-
+            
         }
-        _boardObjects[row,col] = boardObject;
+        _boardObjects[row, col] = boardObject;
     }
     
     private void UpdateCurrentPlayerText()
@@ -124,11 +116,10 @@ public class GameRunner : MonoBehaviour
         {
             currentPlayerText.text = "Current Player: X";
         }
-        else {
+        else 
+        {
             currentPlayerText.text = "Current Player O";
-           
         }
-       // _game.SwitchPlayer();
     }
 
     private void EndGame()

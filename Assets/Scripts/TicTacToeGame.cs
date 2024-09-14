@@ -6,7 +6,7 @@ using TMPro;
 public class TicTacToeGame : Game
 {
     // This game uses the Enum "Player" to keep track of the move. We can use a 2D array to keep track of the board.
-    private Player[,] _board;
+    public Player[,] _board;
     private int _movesMade;
   
 
@@ -30,9 +30,6 @@ public class TicTacToeGame : Game
     public override bool MakeMove(int row, int col)
     {
         //This method will perform the follwing
-        Debug.WriteLine("gameState is :" + gameState);
-
-        
 
         // if the gamestate is not ongoing, return false
         if (gameState != GameState.Ongoing)
@@ -45,8 +42,6 @@ public class TicTacToeGame : Game
         { 
             return false;
         }
-        bool a = IsValidMove(row, col);
-        Debug.WriteLine("IsValidMove :" + a);
 
 
         // update the cell value to the current player value
