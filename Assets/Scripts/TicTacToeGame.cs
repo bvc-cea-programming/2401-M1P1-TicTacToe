@@ -47,6 +47,8 @@ public class TicTacToeGame : Game
         }
         bool a = IsValidMove(row, col);
         Debug.WriteLine("IsValidMove :" + a);
+
+
         // update the cell value to the current player value
         _board[row, col] = currentPlayer;
         

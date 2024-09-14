@@ -12,7 +12,7 @@ public class GameRunner : MonoBehaviour
     [SerializeField]private TMP_Text gameResultText;
     [SerializeField]private GameObject xPrefab;
     [SerializeField]private GameObject oPrefab;
- 
+
     private BoardInteractor boardInteractor;
 
     // This array will hold the instantiated board objects
@@ -24,6 +24,7 @@ public class GameRunner : MonoBehaviour
         _game.InitializeGame();
         UpdateCurrentPlayerText();
         gameResultText.text = "";
+        InitializeBoard();
 
         boardInteractor = GetComponent<BoardInteractor>();
     }
@@ -33,7 +34,23 @@ public class GameRunner : MonoBehaviour
     {
         //Clear the board
         //Reset all the text
-      
+        if(_boardObjects == null)
+        {
+            _boardObjects = new GameObject[3, 3];
+        }
+        
+        for (int row = 0; row < 3; row++)
+        {
+            for (int col = 0; col < 3; col++)
+            {
+                
+                if (_boardObjects[row, col] != null)
+                {
+                    Destroy( _boardObjects[row, col] );
+                }
+                
+            }
+        }
         currentPlayerText.text = "Current Player: X";
         gameResultText.text = "";
     }
@@ -44,9 +61,8 @@ public class GameRunner : MonoBehaviour
         //Make the move
         //_game.MakeMove(row,col);
         bool isMovedValid = _game.IsValidMove(row, col);
-        Debug.Log("gameState is " + _game.CurrentState);
 
-        Debug.Log("isMovedValid :" + isMovedValid);
+       
         if (!isMovedValid) 
         {
             Debug.Log("row is :" + row);
@@ -55,9 +71,7 @@ public class GameRunner : MonoBehaviour
         //If the move is valid, Update the board
         if (_game.MakeMove(row,col))
         {
-            
-            Debug.Log("UpdateBoard");
-            UpdateBoard(position);
+            UpdateBoard(row,col, position);
         }
         else
         {
@@ -77,32 +91,30 @@ public class GameRunner : MonoBehaviour
         else if(_game.CurrentState == GameState.Draw)
         {
             gameResultText.text = "The game is Draw";
-
         }
 
     }
 
-    public void UpdateBoard(Vector3 position)
+    public void UpdateBoard(int row,int col,Vector3 position)
     {
-       
-        Debug.Log("hit position " + position);
+        GameObject boardObject ;
         UpdateCurrentPlayerText();
         Debug.Log("currentPlayer is" + _game.CurrentPlayer);
         // Check the game values and update the board by instantiating correct prefab objects.
         if (_game.CurrentPlayer == Player.X)
         {
            
-            GameObject boardObject =  Instantiate(xPrefab, position, Quaternion.identity);
-           boardObject.transform.rotation = Quaternion.Euler(0, 45, 0);
+            boardObject =  Instantiate(xPrefab, position, Quaternion.identity);
+            boardObject.transform.rotation = Quaternion.Euler(0, 45, 0);
             
         }
         else
         {
-            GameObject boardObject = Instantiate(oPrefab, position, Quaternion.identity);
+            boardObject = Instantiate(oPrefab, position, Quaternion.identity);
             boardObject.transform.rotation = Quaternion.Euler(90, 90, 0);
 
         }
-        
+        _boardObjects[row,col] = boardObject;
     }
     
     private void UpdateCurrentPlayerText()
@@ -131,5 +143,6 @@ public class GameRunner : MonoBehaviour
     public void ResetGame()
     {
         // reset the game
+        InitializeBoard();
     }
 }
