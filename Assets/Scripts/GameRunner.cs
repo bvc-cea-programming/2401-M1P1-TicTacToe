@@ -38,7 +38,7 @@ public class GameRunner : MonoBehaviour
         
     }
 
-    private void UpdateBoard(Vector2 position)
+    private void UpdateBoard(int row, int col, Vector2 position)
     {
         // Check the game values and update the board by instantiating correct prefab objects.    
     }
