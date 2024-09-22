@@ -51,6 +51,7 @@ public class TicTacToeGame : Game
         {
             // Set the game state to Win
             gameState = GameState.Win;
+            SwitchPlayer();
         }
         else if (CheckDrawCondition())
         {

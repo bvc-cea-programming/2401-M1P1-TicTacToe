@@ -9,5 +9,6 @@ public class BoardButton : MonoBehaviour
     public void Interact()
     {
         // This method should communicate with the game runner, and pass in the row and column of the button that was clicked.
+        gameRunner.OnBoardButtonClick(row - 1, col - 1, new Vector2(transform.position.x, transform.position.z));
     }
 }
