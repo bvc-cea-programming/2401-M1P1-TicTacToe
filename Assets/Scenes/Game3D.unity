@@ -1496,8 +1496,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 213084b8b4da16a4995020ea37f7083d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  row: 32
-  col: 0
+  row: 3
+  col: 2
   gameRunner: {fileID: 256197047}
 --- !u!65 &1482034132
 BoxCollider:
