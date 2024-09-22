@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 
 // Inherit this class from the Game class. Complete the tasks in the Game Class before making changes here.
 public class TicTacToeGame : Game
@@ -15,6 +16,7 @@ public class TicTacToeGame : Game
     // override the method that Initializes the game. In this case, it initializes the board.
     public override void InitializeGame()
     {
+        Debug.WriteLine("INitalizeGame");
         _board = new Player[3, 3];
 
         // Set the default player to Player X and set the game state to Ongoing
@@ -134,7 +136,10 @@ public class TicTacToeGame : Game
     {
         if (row < 0 || row > 2 || col < 0 || col > 2)
             throw new ArgumentOutOfRangeException("Position out of bounds.");
+
         return _board[row, col];
+
+
     }
 
     // Method to reset the game
