@@ -1,3 +1,4 @@
+using UnityEditor.Profiling;
 using UnityEngine;
 
 public class BoardInteractor : MonoBehaviour
@@ -19,6 +20,19 @@ public class BoardInteractor : MonoBehaviour
     
     private void CastRayAndInteract(Vector2 pointerPosition)
     {
+        RaycastHit rayHit;
+        Ray ray = _mainCam.ScreenPointToRay(pointerPosition);
+        if (Physics.Raycast(ray.origin, ray.direction, out rayHit))
+        {
+
+            if (rayHit.transform.gameObject.layer == 3)
+            {
+
+                rayHit.transform.gameObject.GetComponent<BoardButton>().Interact();
+
+            }
+
+        }
         // Cast a physics ray from the camera to the pointer position
         // Check for a Board Button and interact with it
     }

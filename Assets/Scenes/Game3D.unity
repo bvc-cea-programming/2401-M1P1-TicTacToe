@@ -363,7 +363,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 287632691}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Board Buttons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -542,7 +542,7 @@ GameObject:
   - component: {fileID: 439922247}
   - component: {fileID: 439922249}
   - component: {fileID: 439922248}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: 22
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -611,7 +611,7 @@ GameObject:
   - component: {fileID: 489456521}
   - component: {fileID: 489456523}
   - component: {fileID: 489456522}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: 12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -680,7 +680,7 @@ GameObject:
   - component: {fileID: 565065539}
   - component: {fileID: 565065541}
   - component: {fileID: 565065540}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: 13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1084,7 +1084,7 @@ GameObject:
   - component: {fileID: 1111049462}
   - component: {fileID: 1111049464}
   - component: {fileID: 1111049463}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: 11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1153,7 +1153,7 @@ GameObject:
   - component: {fileID: 1341141376}
   - component: {fileID: 1341141378}
   - component: {fileID: 1341141377}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: 33
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1393,7 +1393,7 @@ GameObject:
   - component: {fileID: 1410139762}
   - component: {fileID: 1410139764}
   - component: {fileID: 1410139763}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: 23
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1462,7 +1462,7 @@ GameObject:
   - component: {fileID: 1482034130}
   - component: {fileID: 1482034132}
   - component: {fileID: 1482034131}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: 32
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1496,8 +1496,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 213084b8b4da16a4995020ea37f7083d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  row: 32
-  col: 0
+  row: 3
+  col: 2
   gameRunner: {fileID: 256197047}
 --- !u!65 &1482034132
 BoxCollider:
@@ -1531,7 +1531,7 @@ GameObject:
   - component: {fileID: 1660303969}
   - component: {fileID: 1660303971}
   - component: {fileID: 1660303970}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: 31
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1706,7 +1706,7 @@ GameObject:
   - component: {fileID: 1918383700}
   - component: {fileID: 1918383702}
   - component: {fileID: 1918383701}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: 21
   m_TagString: Untagged
   m_Icon: {fileID: 0}
