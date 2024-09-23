@@ -26,7 +26,10 @@ public class BoardInteractor : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
-            Debug.Log("Hit " + hit.collider.ToString());
+            if(hit.collider.TryGetComponent(out BoardButton _boardbutton))
+            {
+                _boardbutton.Interact();
+            }
         }
     }
 }

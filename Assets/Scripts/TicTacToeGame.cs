@@ -36,10 +36,14 @@ public class TicTacToeGame : Game
             return false; 
 
         // if the move is not valid, return false
+
         if (!IsValidMove(row, col)) 
             return false;
+
         // update the cell value to the current player value
+
         _board[row, col] = currentPlayer;
+
         // increment the number of moves
         _movesMade++;
 
@@ -47,6 +51,7 @@ public class TicTacToeGame : Game
         {
             // Set the game state to Win
             gameState = GameState.Win;
+            SwitchPlayer();
         }
         else if (CheckDrawCondition())
         {
@@ -108,6 +113,7 @@ public class TicTacToeGame : Game
     {
         // In a switch case statement, check the game state and return the appropriate string.
         // Uncomment the switch statement below, and add your code replacing the '...'
+        SwitchPlayer();
         switch (gameState)
         {
             case GameState.Win:
