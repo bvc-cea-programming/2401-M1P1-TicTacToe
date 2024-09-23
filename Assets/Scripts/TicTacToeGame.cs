@@ -119,7 +119,7 @@ public class TicTacToeGame : Game
             default:
                 return "The game is ongoing.";
         }
-        return "";
+       
     }
 
     // Override the GetGameResult method from the game class

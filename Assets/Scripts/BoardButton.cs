@@ -8,6 +8,8 @@ public class BoardButton : MonoBehaviour
     
     public void Interact()
     {
+        Vector3 Location = transform.position;
+        gameRunner.OnBoardButtonClick(row, col, Location);
         // This method should communicate with the game runner, and pass in the row and column of the button that was clicked.
     }
 }
