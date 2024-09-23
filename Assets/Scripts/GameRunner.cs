@@ -57,13 +57,14 @@ public class GameRunner : MonoBehaviour
                 EndGame();
             }
         }
-        //Make the move
+        
         //If the move is valid,
         //Update the board
         //Update the game state, check if the game is over
 
 
     }
+    //Make the move
 
     private void UpdateBoard(int row, int col, Vector3 position)
     {

@@ -16,7 +16,8 @@ public class BoardInteractor : MonoBehaviour
             CastRayAndInteract(Input.mousePosition);
         }
     }
-    
+    // Cast a physics ray from the camera to the pointer position
+    // Check for a Board Button and interact with it
     private void CastRayAndInteract(Vector2 pointerPosition)
     {
         Ray ray = _mainCam.ScreenPointToRay(pointerPosition);
@@ -29,7 +30,6 @@ public class BoardInteractor : MonoBehaviour
                 boardButton.Interact();
             }
         }
-        // Cast a physics ray from the camera to the pointer position
-        // Check for a Board Button and interact with it
+        
     }
 }
