@@ -24,7 +24,10 @@ public class GameRunner : MonoBehaviour
     public void InitializeBoard()
     {
         if(_boardObjects == null)
-            _boardObjects=new GameObject[3,3];
+        {
+            _boardObjects = new GameObject[3, 3];
+        }
+           
         else 
         {
             for(int row=0;row<3;row++)
@@ -67,17 +70,19 @@ public class GameRunner : MonoBehaviour
 
     private void UpdateBoard(int row, int col, Vector2 position)
     {
-        if(_game.GetPlayerAtPosition(row,col)== Player.O && _boardObjects[row,col]==null)
+      
+        if (_game.GetPlayerAtPosition(row, col) == Player.O)
         {
-            _boardObjects[row, col] = Instantiate(oPrefab, position, Quaternion.Euler(0, 45, 0));
+            _boardObjects[row, col] = Instantiate(oPrefab, position, Quaternion.Euler(90, 0, 0));
         }
-        if (_game.GetPlayerAtPosition(row, col) == Player.X && _boardObjects[row, col] == null)
+        else if (_game.GetPlayerAtPosition(row, col) == Player.X)
         {
-            _boardObjects[row, col] = Instantiate(xPrefab, position, Quaternion.Euler(90, 0, 0));
+            _boardObjects[row, col] = Instantiate(xPrefab, position, Quaternion.Euler(0, -45, 0));
         }
+
         // Check the game values and update the board by instantiating correct prefab objects.    
     }
-    
+
     private void UpdateCurrentPlayerText()
     {
         // update which player is currently playing
@@ -88,8 +93,7 @@ public class GameRunner : MonoBehaviour
     private void EndGame()
     {
         // update and display who won the game
-        gameResultText = null;
-        
+         
     }
 
     public void ResetGame()
@@ -97,6 +101,7 @@ public class GameRunner : MonoBehaviour
         _game.ResetGame();
         InitializeBoard();
         UpdateCurrentPlayerText();
+        gameResultText.text = "";
         // reset the game
     }
 }

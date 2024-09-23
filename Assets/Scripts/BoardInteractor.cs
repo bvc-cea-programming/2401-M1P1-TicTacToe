@@ -23,10 +23,10 @@ public class BoardInteractor : MonoBehaviour
         RaycastHit raycastHit;
         if(Physics.Raycast(_pointray,out raycastHit))
         {
-            BoardButton boardbutton = raycastHit.collider.GetComponent<BoardButton>();
-            if(boardbutton != null) 
+            BoardButton button = raycastHit.collider.GetComponent<BoardButton>();
+            if(button != null) 
             {
-                boardbutton.Interact();
+               button.Interact();
             }
             else 
             {
