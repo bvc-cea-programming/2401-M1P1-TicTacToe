@@ -19,6 +19,7 @@ public class GameRunner : MonoBehaviour
         _game.InitializeGame();
         UpdateCurrentPlayerText();
         gameResultText.text = "";
+        InitializeBoard();
     }
 
     public void InitializeBoard()
@@ -93,7 +94,7 @@ public class GameRunner : MonoBehaviour
     private void EndGame()
     {
         // update and display who won the game
-         
+        gameResultText.text = _game.GetGameResult();
     }
 
     public void ResetGame()
