@@ -6,7 +6,7 @@ public class TicTacToeGame : Game
 {
     // This game uses the Enum "Player" to keep track of the move. We can use a 2D array to keep track of the board.
     private Player[,] _board;
-    private int _movesMade;
+    public int _movesMade;
 
     public TicTacToeGame() : base()
     {
@@ -77,7 +77,7 @@ public class TicTacToeGame : Game
     }
 
     // Override the CheckWinCondition method from the game class
-    protected override bool CheckWinCondition(int row, int col)
+    public override bool CheckWinCondition(int row, int col)
     {
         // Use  this method to check if the move is a win. It will return true if the move is a win. Otherwise, it will return false.
         // Check row

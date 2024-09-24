@@ -42,7 +42,7 @@ public abstract class Game
 
     public abstract void InitializeGame();
     public abstract bool MakeMove(int row, int col);
-    protected abstract bool CheckWinCondition(int row, int col);
+    public abstract bool CheckWinCondition(int row, int col);
     protected abstract bool CheckDrawCondition();
     public abstract string GetGameResult();
 
