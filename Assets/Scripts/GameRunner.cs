@@ -62,18 +62,7 @@ public class GameRunner : MonoBehaviour
     private void UpdateBoard(int row, int col, Vector2 position)
     {
         // Check the game values and update the board by instantiating correct prefab objects.
-        if (currentPlayerText.text.Equals("Player1's turn"))
-        {
-            GameObject obj = Instantiate(xPrefab, position, Quaternion.identity);
-            _boardObjects[row, col] = obj;
-            Debug.Log("Hello, my name is X");
-        }
-        if (currentPlayerText.text.Equals("Player2's turn"))
-        {
-            GameObject obj = Instantiate(oPrefab, position, Quaternion.identity);
-            _boardObjects[row,col] = obj;
-            Debug.Log("Hello, my name is O");
-        }
+        
     }
     
     private void UpdateCurrentPlayerText()
