@@ -11,7 +11,7 @@ public class BoardButton : MonoBehaviour
     {
         // This method should communicate with the game runner, and pass in the row and column of the button that was clicked.
         gameRunner.OnBoardButtonClick(row, col, transform.position);
-        Debug.Log(row + " " + col);
+        Debug.Log(row + ", " + col);
 
     }
 }

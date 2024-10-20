@@ -5,6 +5,7 @@ using System;
 using static UnityEngine.Rendering.DebugUI.Table;
 using UnityEngine.UIElements;
 using System.Collections.Generic;
+using UnityEngine.Assertions.Must;
 
 public class GameRunner : MonoBehaviour
 {
@@ -15,26 +16,29 @@ public class GameRunner : MonoBehaviour
     [SerializeField]private GameObject oPrefab;
 
     // This array will hold the instantiated board objects
-    private GameObject[,] _boardObjects = new GameObject[3,3]; 
-    
+    private GameObject[,] _boardObjects = new GameObject[3,3];
+
+    private GameObject xClone;
+    private GameObject oClone;
+
     private void Start()
     {
-        _game = new TicTacToeGame();
-        _game.InitializeGame();
-        UpdateCurrentPlayerText();
+        //_game = new TicTacToeGame();
+        //_game.InitializeGame();
+        InitializeBoard();
+        //UpdateCurrentPlayerText();
         gameResultText.text = "";
     }
 
     public void InitializeBoard()
     {
         //Clear the board
-        Destroy(xPrefab);
-        Destroy(oPrefab);
+        Destroy(xClone);
+        Destroy(oClone);
         _game._movesMade = 0;
         //Reset all the text
         currentPlayerText.text = "Player1's turn";
         gameResultText.text = "";
-
     }
 
     public void OnBoardButtonClick(int row, int col, Vector2 position)
@@ -46,13 +50,13 @@ public class GameRunner : MonoBehaviour
             if (moveMade)
             {
                 UpdateBoard(row, col, position);
-                if (_game.CurrentState == GameState.Ongoing)
+                if (_game.CurrentState == GameState.Draw)
                 {
-                    UpdateCurrentPlayerText();
+                    EndGame(row, col);
                 }
                 else
                 {
-                    EndGame(row, col);
+                    UpdateCurrentPlayerText();
                 }
             }
         }
@@ -62,24 +66,26 @@ public class GameRunner : MonoBehaviour
     private void UpdateBoard(int row, int col, Vector2 position)
     {
         // Check the game values and update the board by instantiating correct prefab objects.
+        for (int i = 0; i < _boardObjects.Length; i++)
+        {
+            row = i / 3;
+            col = i % 3;
+            if (currentPlayerText.text.Equals("Player1's turn"))
+            {
+                xClone = Instantiate(xPrefab, position, Quaternion.identity);
+            }
+            else if (currentPlayerText.text.Equals("Player2's turn"))
+            {
+                oClone = Instantiate(oPrefab, position, Quaternion.identity);
+            }
+        }
+        
         
     }
     
     private void UpdateCurrentPlayerText()
     {
-        // update which player is currently playing
-        if (currentPlayerText.text.Equals("Player1's turn"))
-        {
-            currentPlayerText.text = "Player2's turn";
-        }
-        if (currentPlayerText.text.Equals("Player2's turn"))
-        {
-            currentPlayerText.text = "Player1's turn";
-        }
-        if (_game._movesMade >= 9)
-        {
-            currentPlayerText.text = "Player1's turn";
-        }
+        currentPlayerText.text = $"Current Player: {_game.CurrentPlayer}";
     }
 
     private void EndGame(int row, int col)

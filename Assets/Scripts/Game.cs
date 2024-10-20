@@ -47,7 +47,7 @@ public abstract class Game
     public abstract string GetGameResult();
 
     // What does this method do?
-    protected void SwitchPlayer()
+    public void SwitchPlayer()
     {
         currentPlayer = currentPlayer == Player.X ? Player.O : Player.X;
         // A: This method is used to switch the player to another if the player is done the move.
