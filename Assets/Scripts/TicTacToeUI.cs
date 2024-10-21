@@ -11,7 +11,7 @@ public class TicTacToeUI : MonoBehaviour
     [SerializeField]private TMP_Text gameResultText;
     [SerializeField]private Button resetButton;
     
-    /*
+    
     private TicTacToeGame _game;
 
     private void Start()
@@ -86,5 +86,5 @@ public class TicTacToeUI : MonoBehaviour
         UpdateCurrentPlayerText();
         gameResultText.text = "";
     }
-    */
+    
 }
